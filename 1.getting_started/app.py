@@ -2,6 +2,7 @@ print("Hello world")
 
 from flask import Flask
 import redis
+import os
 
 app=Flask("counter")
 
@@ -9,9 +10,14 @@ app=Flask("counter")
 
 #count = 0
 
+redis_host = os.environ['REDIS_HOST']
+print(f"Redis host is {redis_host}, in updated code")
+redis_port = int(os.environ['REDIS_PORT'])
+print(f"Redis port is {redis_port}")
+
 db = redis.Redis(
-    host='redis-server',
-    port=6379,
+    host=redis_host,
+    port=redis_port,
     decode_responses=True
 )
 
